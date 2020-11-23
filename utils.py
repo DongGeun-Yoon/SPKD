@@ -16,12 +16,6 @@ from config import im_size, epsilon, epsilon_sqr, device
 from scipy.ndimage import gaussian_filter, morphology
 from skimage.measure import label, regionprops
 
-def jpeg(image, quality=60):
-    encode_param = [int(cv.IMWRITE_JPEG_QUALITY), quality]
-    _, encimg = cv.imencode('.jpg', image, encode_param)
-    decimg = cv.imdecode(encimg, cv.IMREAD_UNCHANGED)
-    return decimg
-
 def clip_gradient(optimizer, grad_clip):
     """
     Clips gradients computed during backpropagation to avoid explosion of gradients.
@@ -103,9 +97,8 @@ def parse_args():
     parser.add_argument('--optimizer', default='Adam', help='optimizer')
     parser.add_argument('--weight-decay', type=float, default=0.0, help='weight decay')
     parser.add_argument('--mom', type=float, default=0.9, help='momentum')
-    parser.add_argument('--batch-size', type=int, default=4, help='batch size in each context')
+    parser.add_argument('--batch-size', type=int, default=16, help='batch size in each context')
     parser.add_argument('--checkpoint', type=str, default=None, help='checkpoint')
-    parser.add_argument('--pretrained', type=bool, default=True, help='pretrained model')
     parser.add_argument('--n_features', type=int, default=32, help='feature numbers')
     parser.add_argument('--KD_type', type=str, default='spatial, channel', help='knowledge distillation type')
     parser.add_argument('--feature_layer', type=str, default='[1,2,3,4]', help='feature selected')
@@ -283,12 +276,6 @@ def over_all_loss(student_out, teacher_out, alpha, student_fms, teacher_fms,
     for i in range(len(aggregated_student_fms)):
         for j in range(len(aggregated_student_fms[i])):
             loss += l2(aggregated_student_fms[i][j], aggregated_teacher_fms[i][j]) * KD_weight[i]
-    #channel
-    #for i in range(len(aggregated_student_fms[1])):
-    #    loss += l2(aggregated_student_fms[1][i], aggregated_teacher_fms[1][i])
-    #batch
-    #for i in range(len(aggregated_student_fms[2])):
-    #    loss += l2(aggregated_student_fms[2][i], aggregated_teacher_fms[2][i])
 
     return loss
 
@@ -375,18 +362,3 @@ def AT(fm):
     norm = torch.norm(am, dim=(2, 3), keepdim=True)
     am = torch.div(am, norm + eps)
     return am
-
-
-def trans_layer(fms):
-    _, _, w, h = fms[0].size()
-
-    for i  in range(len(fms)):
-        fms[i] = nn.functional.adaptive_avg_pool2d(fms[i],(w,h))
-
-    fm = torch.cat(fms, dim=1)
-
-    fm = fm.view(fm.size(0), fm.size(1), -1)
-    norm_fm = fm / (torch.sqrt(torch.sum(torch.pow(fm, 2), 1)).unsqueeze(1).expand(fm.shape) + 0.0000001)
-    s = norm_fm.transpose(1,2).bmm(norm_fm)
-    s = s.unsqueeze(1)
-    return s

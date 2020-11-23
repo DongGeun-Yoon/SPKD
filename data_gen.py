@@ -9,7 +9,7 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 
 from config import im_size, unknown_code, fg_path, bg_path, a_path, num_valid
-from utils import safe_crop, jpeg
+from utils import safe_crop
 
 # Data augmentation and normalization for training
 # Just normalization for validation
@@ -149,9 +149,6 @@ class DIMDataset(Dataset):
 
         x = torch.zeros((4, im_size, im_size), dtype=torch.float)
         img = img[..., ::-1]  # RGB
-        #jpeg
-        #img = jpeg(img, quality = 60)
-
         img = transforms.ToPILImage()(img)
         img = self.transformer(img)
 

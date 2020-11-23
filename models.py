@@ -418,6 +418,7 @@ class DIMModel_student(nn.Module):
                 m.bias.data.zero_()
 
         return nn.Sequential(*C)
+
 if __name__ == '__main__':
     model = DIMModel.to(device)
     #summary(model, (4, im_size, im_size))

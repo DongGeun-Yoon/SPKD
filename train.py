@@ -26,7 +26,6 @@ def train_net(args):
     # load checkpoint
     if checkpoint is None:
         model = DIMModel_student(n_classes=1, in_channels=4, is_unpooling=True, n_features=args.n_features)
-        #model = nn.DataParallel(model)
 
         if args.optimizer == 'sgd':
             optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.mom,
@@ -157,7 +156,7 @@ def train(train_loader, teacher_model, student_model, optimizer, epoch, logger):
 def train_OFD(train_loader, teacher_model, student_model, optimizer, epoch, logger):
     student_model.train()  # train mode (dropout and batchnorm is used)
     dst = Distiller(teacher_model, student_model)
-    #dst = dst.to(device)
+    dst = dst.to(device)
     losses = AverageMeter()
 
     # Batches
@@ -171,16 +170,12 @@ def train_OFD(train_loader, teacher_model, student_model, optimizer, epoch, logg
         # Forward prop.
         teacher_out, student_out, loss_distill = dst(img)
 
-        #student_fms, student_out = student_model(img)  # [N, 3, 320, 320]
-        #teacher_fms, teacher_out = teacher_model(img)  # [N, 3, 320, 320]
-
         student_out = student_out.reshape((-1, 1, im_size * im_size))  # [N, 320*320]
-        teacher_out = teacher_out.reshape((-1, 1, im_size * im_size))  # [N, 320*320]
 
         # Calculate loss
         # loss = criterion(student_out, alpha_label)
         loss = alpha_prediction_loss(student_out, alpha_label) + loss_distill.sum() / 1000
-        #loss = over_all_loss(student_out, teacher_out, alpha_label, student_fms, teacher_fms)
+
         # Back prop.
         optimizer.zero_grad()
         loss.backward()
