@@ -52,7 +52,7 @@ Run the following command to train with batch, spatial, channel similarity prese
 ```bash
 $ python train.py --batch-size 16 --KD_type batch,spatial,channel --feature_layer [1,2,3,4] --KD_weight [1,1,1]
 ```
-### testing
+### Testing
 Run the following command to evaluate `BEST_checkpoint.tar`.
 ```bash
 $ python test.py
