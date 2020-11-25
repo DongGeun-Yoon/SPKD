@@ -45,7 +45,7 @@ Here is the results of DIM-student with and without knowledge distillation on th
 Download pretrained [teacher model](https://github.com/foamliu/Deep-Image-Matting-PyTorch) before train and place in folder `pretrained`.
 Run the following command to train with batch, spatial, channel similarity preserving knowledge distillation.
 
-      python train.py --batch-size 16 --KD_type batch,spatial,channel --feature_layer [1,2,3,4] --KD_weight [1,1,1]
+    python train.py --batch-size 16 --KD_type batch,spatial,channel --feature_layer [1,2,3,4] --KD_weight [1,1,1]
   
 ### testing
 Run the following command to evaluate `BEST_checkpoint.tar`.
