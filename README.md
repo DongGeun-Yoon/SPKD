@@ -4,7 +4,7 @@
   
   Official implementation of the paper "Lightweight Deep CNN for Natural Image Matting via Similarity Preserving Knowledge Distillation" [[paper](https://ieeexplore.ieee.org/document/9269400)]
  
- Donggeun Yoon, Jinsu Park, Donghyeon Cho
+ Donggeun Yoon, Jinsun Park, Donghyeon Cho
  
 ## Requirement
 - python3
