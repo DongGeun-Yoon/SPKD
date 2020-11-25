@@ -55,3 +55,14 @@ $ python test.py
     
 ## Acknowledgement
 The code is built on [Deep image matting (pytorch)](https://github.com/foamliu/Deep-Image-Matting-PyTorch). Thanks to authors for sharing the codes.
+
+## Citation
+
+```
+@ARTICLE{9269400,
+  author={D. {Yoon} and J. {Park} and D. {Cho}},
+  journal={IEEE Signal Processing Letters}, 
+  title={Lightweight Deep CNN for Natural Image Matting via Similarity-Preserving Knowledge Distillation}, 
+  year={2020}
+  }
+```
