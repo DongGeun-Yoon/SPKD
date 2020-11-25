@@ -20,7 +20,7 @@ def train_net(args):
     decays_since_improvement = 0
 
     # teacher setting
-    teacher = torch.load('./pretrained/teacher_model.tar')
+    teacher = torch.load('./pretrained/BEST_checkpoint.tar')
     teacher_model = teacher['model'].module
 
     # load checkpoint
