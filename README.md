@@ -35,8 +35,10 @@ Here is the results of DIM-student with and without knowledge distillation on th
 1. Please contact authors requesting for the Adobe Image Matting dataset.
 2. Download images from the COCO and Pascal VOC datasets in folder `data` and Run the following command to composite images.  
 
+
     python pre_process.py
-      
+
+
 3. Run the following command to seperate the composited datasets with training set and valid set.
 
     python data_gen.py
