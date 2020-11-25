@@ -31,7 +31,7 @@ Here is the results of DIM-student with and without knowledge distillation on th
 |spatial+channel|84.37|0.034|47.63|89.35|
 |batch+spatial+channel|91.30|0.037|56.20|97.20|
 
-## DataSets
+## Dataset
 1. Please contact authors requesting for the Adobe Image Matting dataset.
 2. Download images from the COCO and Pascal VOC datasets in folder `data` and Run the following command to composite images.  
 ```bash
