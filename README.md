@@ -2,7 +2,7 @@
 ## Introduction
   **Accepted at IEEE Signal Processing Letters 2020**
   
-  Official implementation of the paper "Lightweight Deep CNN for Natural Image Matting via Similarity Preserving Knowledge Distillation" [[paper]](https://ieeexplore.ieee.org/document/9269400)
+  Official implementation of the paper "Lightweight Deep CNN for Natural Image Matting via Similarity Preserving Knowledge Distillation" [[paper](https://ieeexplore.ieee.org/document/9269400)]
  
  Donggeun Yoon, Jinsu Park, Donghyeon Cho
  
