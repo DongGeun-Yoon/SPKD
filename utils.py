@@ -100,9 +100,9 @@ def parse_args():
     parser.add_argument('--batch-size', type=int, default=16, help='batch size in each context')
     parser.add_argument('--checkpoint', type=str, default=None, help='checkpoint')
     parser.add_argument('--n_features', type=int, default=32, help='feature numbers')
-    parser.add_argument('--KD_type', type=str, default='spatial, channel', help='knowledge distillation type')
+    parser.add_argument('--KD_type', type=str, default='batch,spatial,channel', help='knowledge distillation type')
     parser.add_argument('--feature_layer', type=str, default='[1,2,3,4]', help='feature selected')
-    parser.add_argument('--KD_weight', type=list, default=[50, 1], help='distillation loss weight')
+    parser.add_argument('--KD_weight', type=str, default='[1,1,1]', help='distillation loss weight')
     args = parser.parse_args()
     return args
 
@@ -232,8 +232,9 @@ def ensure_folder(folder):
 def over_all_loss(student_out, teacher_out, alpha, student_fms, teacher_fms,
                   KD_type, feature_maps, KD_weight):
     mask = alpha[:, 1, :]
-
+    KD_weight = eval(KD_weight)
     l2 = nn.MSELoss()
+
     DS_loss = alpha_prediction_loss(student_out, alpha)
     TS_loss = alpha_prediction_loss(student_out, teacher_out, mask)
 
