@@ -1,6 +1,7 @@
 # Lightweight-Deep-CNN-for-Natural-Image-Matting-via-Similarity-Preserving-Knowledge-Distillation
 ## Introduction
   **Accepted at IEEE Signal Processing Letters 2020**
+  
 <p align="center">
   <img src="images/image.png" width="350" title="Original Image"/>
   <img src="images/spatial+channel.png" width="350" title="spatial+channel method"/>
