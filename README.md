@@ -1,7 +1,11 @@
 # Lightweight-Deep-CNN-for-Natural-Image-Matting-via-Similarity-Preserving-Knowledge-Distillation
 ## Introduction
   **Accepted at IEEE Signal Processing Letters 2020**
-  
+<p align="center">
+  <img src="images/image.png" width="350" title="Original Image"/>
+  <img src="images/spatial+channel.png" width="350" title="spatial+channel method"/>
+</p>
+
   Official implementation of the paper "Lightweight Deep CNN for Natural Image Matting via Similarity Preserving Knowledge Distillation" [[paper](https://ieeexplore.ieee.org/document/9269400)]
  
  Donggeun Yoon, Jinsun Park, Donghyeon Cho
@@ -64,5 +68,5 @@ The code is built on [Deep image matting (pytorch)](https://github.com/foamliu/D
   journal={IEEE Signal Processing Letters}, 
   title={Lightweight Deep CNN for Natural Image Matting via Similarity-Preserving Knowledge Distillation}, 
   year={2020}
-  }
+}
 ```
